@@ -17,11 +17,16 @@ export const NAV_THEME = {
   },
 };
 
+export const BACKEND_API_URL = process.env.EXPO_PUBLIC_BACKEND_API_URL ?? "";
+
 export const TURNKEY_API_URL = process.env.EXPO_PUBLIC_TURNKEY_API_URL ?? "";
 export const TURNKEY_PARENT_ORG_ID =
   process.env.EXPO_PUBLIC_TURNKEY_ORGANIZATION_ID ?? "";
-export const PASSKEY_APP_NAME = process.env.EXPO_PUBLIC_PASSKEY_APP_NAME ?? "";
-export const RP_ID = process.env.EXPO_PUBLIC_RPID ?? "";
 
-export const GOOGLE_IOS_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID ?? "";
-export const GOOGLE_ANDROID_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID ?? "";
+export const RP_ID = process.env.EXPO_PUBLIC_RPID ?? "";
+export const PASSKEY_APP_NAME = process.env.EXPO_PUBLIC_PASSKEY_APP_NAME ?? "";
+
+export const GOOGLE_IOS_CLIENT_ID =
+  process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID ?? "";
+export const GOOGLE_ANDROID_CLIENT_ID =
+  process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID ?? "";

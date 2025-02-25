@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Text } from "~/components/ui/text";
 import { useAuthRelay } from "~/hooks/use-auth-relayer";
 import { isSupported } from "@turnkey/react-native-passkey-stamper";
-import { Email, LoginMethod } from "~/lib/types";
+import { LoginMethod, OtpType } from "~/lib/types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cn } from "~/lib/utils";
 import { BaseButton } from "react-native-gesture-handler";
@@ -18,8 +18,7 @@ export const Auth = () => {
   const insets = useSafeAreaInsets();
   const {
     state,
-    initEmailLogin,
-    initPhoneLogin,
+    initOtpLogin,
     signUpWithPasskey,
     loginWithPasskey,
     loginWithOAuth,
@@ -61,7 +60,9 @@ export const Auth = () => {
               variant="outline"
               disabled={!!state.loading || !isValidEmail}
               loading={state.loading === LoginMethod.Email}
-              onPress={() => initEmailLogin(email as Email)}
+              onPress={() =>
+                initOtpLogin({ otpType: OtpType.Email, contact: email })
+              }
               className={cn("rounded-xl", {
                 "border-black": isValidEmail,
               })}
@@ -77,7 +78,9 @@ export const Auth = () => {
               variant="outline"
               disabled={!!state.loading || !isValidPhone}
               loading={state.loading === LoginMethod.Phone}
-              onPress={() => initPhoneLogin(phone)}
+              onPress={() =>
+                initOtpLogin({ otpType: OtpType.Sms, contact: phone })
+              }
               className={cn("rounded-xl", {
                 "border-black": isValidPhone,
               })}

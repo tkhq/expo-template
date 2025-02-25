@@ -1,32 +1,32 @@
-import { useEffect, useState, useRef } from 'react';
-import { View } from 'react-native';
-import { Text } from '~/components/ui/text';
-import { OtpInput, OtpInputRef } from 'react-native-otp-entry';
+import { useEffect, useState, useRef } from "react";
+import { View } from "react-native";
+import { Text } from "~/components/ui/text";
+import { OtpInput, OtpInputRef } from "react-native-otp-entry";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { useAuthRelay } from '~/hooks/use-auth-relayer';
-import { router } from 'expo-router';
-import { useSearchParams } from 'expo-router/build/hooks';
-import { Button } from '~/components/ui/button';
+} from "~/components/ui/card";
+import { useAuthRelay } from "~/hooks/use-auth-relayer";
+import { router } from "expo-router";
+import { useSearchParams } from "expo-router/build/hooks";
+import { Button } from "~/components/ui/button";
 
 const OTPAuth = () => {
-  const [otpCode, setOtpCode] = useState('');
-  const { state, completeEmailAuth, clearError } = useAuthRelay();
+  const [otpCode, setOtpCode] = useState("");
+  const { state, completeOtpAuth, clearError } = useAuthRelay();
   const otpInputRef = useRef<OtpInputRef>(null);
 
   const searchParams = useSearchParams();
-  const otpId = searchParams.get('otpId') ?? '';
-  const organizationId = searchParams.get('organizationId') ?? '';
+  const otpId = searchParams.get("otpId") ?? "";
+  const organizationId = searchParams.get("organizationId") ?? "";
 
   useEffect(() => {
     if (state.error) {
       clearError();
-      setOtpCode('');
+      setOtpCode("");
       otpInputRef.current?.clear();
     }
   }, [state.error]);
@@ -46,10 +46,10 @@ const OTPAuth = () => {
             secureTextEntry
             theme={{
               focusedPinCodeContainerStyle: {
-                borderColor: 'hsl(241.31 100% 64.12%)',
+                borderColor: "hsl(241.31 100% 64.12%)",
               },
               focusStickStyle: {
-                backgroundColor: '#404040',
+                backgroundColor: "#404040",
               },
             }}
             numberOfDigits={6}
@@ -70,7 +70,7 @@ const OTPAuth = () => {
           <Button
             className="flex-1"
             disabled={otpCode.length !== 6}
-            onPress={() => completeEmailAuth({ otpId, otpCode, organizationId })}
+            onPress={() => completeOtpAuth({ otpId, otpCode, organizationId })}
           >
             <Text>Continue</Text>
           </Button>
