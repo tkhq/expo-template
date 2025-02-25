@@ -118,11 +118,24 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     dispatch({ type: "LOADING", payload: LoginMethod.Email });
     try {
       console.log(
-        "TODO: Implement backend call to initiate OTP authentication for email"
+        "TODO: Replace this with an actual backend request to initiate OTP authentication for email"
       );
+
+      // Example request - replace with your actual backend call
+      /*
+      const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ otpType: "OTP_TYPE_EMAIL", email }),
+      }).then((res) => res.json());
+      */
+
+      // REMOVE ME: This is a placeholder response
       const response = {
-        otpId: "hardcoded-otp-id",
-        organizationId: "hardcoded-org-id",
+        otpId: "otp-id",
+        organizationId: "org-id",
       };
 
       if (response) {
@@ -154,9 +167,18 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       try {
         const targetPublicKey = await createEmbeddedKey();
 
-        console.log(
-          "TODO: Implement backend call to initiate OTP authentication for email"
-        );
+        // Example request - replace with your actual backend call
+        /*
+        const response = await fetch(`${BACKEND_API_URL}/auth/otpAuth`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ otpId, otpCode, organizationId, targetPublicKey, invalidateExisting: false }),
+        }).then((res) => res.json());
+        */
+
+        // REMOVE ME: This is a placeholder response
         const response = {
           credentialBundle: "credential-bundle",
         };
@@ -176,11 +198,24 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     dispatch({ type: "LOADING", payload: LoginMethod.Phone });
     try {
       console.log(
-        "TODO: Implement backend call to initiate OTP authentication for email"
+        "TODO: Replace this with an actual backend request to initiate OTP authentication for phone"
       );
+
+      // Example request - replace with your actual backend call
+      /*
+      const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ otpType: "OTP_TYPE_SMS", phone }),
+      }).then((res) => res.json());
+      */
+
+      // REMOVE ME: This is a placeholder response
       const response = {
-        otpId: "hardcoded-otp-id",
-        organizationId: "hardcoded-org-id",
+        otpId: "otp-id",
+        organizationId: "org-id",
       };
 
       if (response) {
@@ -213,8 +248,21 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         const targetPublicKey = await createEmbeddedKey();
 
         console.log(
-          "TODO: Implement backend call to initiate OTP authentication for email"
+          "TODO: Replace this with an actual backend request to complete OTP authentication for phone"
         );
+
+        // Example request - replace with your actual backend call
+        /*
+        const response = await fetch(`${BACKEND_API_URL}/auth/otpAuth`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ otpId, otpCode, organizationId, targetPublicKey, invalidateExisting: false }),
+        }).then((res) => res.json());
+        */
+
+        // REMOVE ME: This is a placeholder response
         const response = {
           credentialBundle: "credential-bundle",
         };
@@ -255,8 +303,21 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       });
 
       console.log(
-        "TODO: Implement backend call to initiate OTP authentication for email"
+        "TODO: Replace this with an actual backend request to create a sub-organization"
       );
+
+      // Example request - replace with your actual backend call
+      /*
+      const response = await fetch(`${BACKEND_API_URL}/auth/createSubOrg`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ challenge: authenticatorParams.challenge, attestation: authenticatorParams.attestation }),
+      }).then((res) => res.json());
+      */
+
+      // REMOVE ME: This is a placeholder response
       const response = {
         subOrganizationId: "sub-org-id",
       };
@@ -353,8 +414,21 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
     try {
       console.log(
-        "TODO: Implement backend call to initiate OTP authentication for email"
+        "TODO: Replace this with an actual backend request to authenticate the user with OAuth"
       );
+
+      // Example request - replace with your actual backend call
+      /*
+      const response = await fetch(`${BACKEND_API_URL}/auth/oAuthLogin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ oidcToken, providerName, targetPublicKey, expirationSeconds }),
+      }).then((res) => res.json());
+    */
+
+      // REMOVE ME: This is a placeholder response
       const response = {
         credentialBundle: "credential-bundle",
       };
