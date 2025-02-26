@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Process and runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Caches (Expo-related caches as well)
+.cache
+.expo
+.expo-shared
+
+# Build outputs
+dist
+build
+
+# Environment files (if you use .env.example, be sure not to ignore it)
+.env
+.env.*
+
+# OS files
+.DS_Store
+
+# Version control directories
+**/.git
+**/.svn
+**/.hg
+
+# Package manager lock file
+pnpm-lock.yaml
