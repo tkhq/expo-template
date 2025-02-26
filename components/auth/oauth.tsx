@@ -145,7 +145,7 @@ export const useEmbeddedKeyAndNonce = () => {
 
       const hashedNonce = await Crypto.digestStringAsync(
         Crypto.CryptoDigestAlgorithm.SHA256,
-        pubKey
+        pubKey,
       );
       setNonce(hashedNonce);
     } catch (error) {

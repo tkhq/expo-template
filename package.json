@@ -9,7 +9,9 @@
     "ios": "npx expo prebuild && npx expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "clean": "rm -rf .expo node_modules"
+    "clean": "rm -rf .expo node_modules",
+    "prettier:check": "prettier --check \"**/*.{css,html,js,json,md,ts,tsx,yaml,yml,mjs}\" --ignore-path ./.prettierignore",
+    "prettier:write": "prettier --write \"**/*.{css,html,js,json,md,ts,tsx,yaml,yml,mjs}\" --ignore-path ./.prettierignore"
   },
   "jest": {
     "preset": "jest-expo"
@@ -42,6 +44,7 @@
     "google-libphonenumber": "^3.2.40",
     "lucide-react-native": "^0.475.0",
     "nativewind": "^4.1.23",
+    "prettier": "^3.5.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.7",

@@ -121,7 +121,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     });
     try {
       console.log(
-        "TODO: Replace this with an actual backend request to initiate OTP authentication"
+        "TODO: Replace this with an actual backend request to initiate OTP authentication",
       );
 
       // <EXAMPLE:INIT_OTP_AUTH>
@@ -146,8 +146,8 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         dispatch({ type: "INIT_EMAIL_AUTH" });
         router.push(
           `/otp-auth?otpId=${encodeURIComponent(
-            response.otpId
-          )}&organizationId=${encodeURIComponent(response.organizationId)}`
+            response.otpId,
+          )}&organizationId=${encodeURIComponent(response.organizationId)}`,
         );
       }
     } catch (error: any) {
@@ -172,7 +172,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         const targetPublicKey = await createEmbeddedKey();
 
         console.log(
-          "TODO: Replace this with an actual backend request to complete OTP authentication"
+          "TODO: Replace this with an actual backend request to complete OTP authentication",
         );
 
         // <EXAMPLE:COMPLETE_OTP_AUTH>
@@ -234,7 +234,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       });
 
       console.log(
-        "TODO: Replace this with an actual backend request to create a sub-organization"
+        "TODO: Replace this with an actual backend request to create a sub-organization",
       );
 
       // <EXAMPLE:SIGNUP_SUB_ORG>
@@ -267,7 +267,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
 
         const httpClient = new TurnkeyClient(
           { baseUrl: TURNKEY_API_URL },
-          stamper
+          stamper,
         );
 
         const targetPublicKey = await createEmbeddedKey();
@@ -309,7 +309,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
 
       const httpClient = new TurnkeyClient(
         { baseUrl: TURNKEY_API_URL },
-        stamper
+        stamper,
       );
 
       const targetPublicKey = await createEmbeddedKey();
@@ -351,7 +351,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
     dispatch({ type: "LOADING", payload: LoginMethod.OAuth });
     try {
       console.log(
-        "TODO: Replace this with an actual backend request to authenticate the user with OAuth"
+        "TODO: Replace this with an actual backend request to authenticate the user with OAuth",
       );
 
       // <EXAMPLE:OAUTH>
