@@ -4,12 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npx expo prebuild && npx expo run:ios",
-    "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
     "ios": "npx expo prebuild && npx expo run:ios",
-    "web": "expo start --web",
-    "test": "jest --watchAll",
-    "clean": "rm -rf .expo node_modules"
+    "clean": "rm -rf .expo node_modules",
+    "postinstall": "node setup.js"
   },
   "jest": {
     "preset": "jest-expo"
