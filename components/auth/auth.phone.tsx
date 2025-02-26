@@ -6,7 +6,7 @@ import CountryPicker, {
   Flag,
   Country,
   CountryCode,
-  CountryCodeList, 
+  CountryCodeList,
 } from "react-native-country-picker-modal";
 import { PhoneNumberFormat, PhoneNumberUtil } from "google-libphonenumber";
 import { getCountryCallingCodeAsync } from "react-native-country-picker-modal/lib/CountryService";
@@ -22,12 +22,12 @@ const OFAC_SANCTIONED_CODES = new Set([
   "IR", // Iran
   "KP", // North Korea
   "CU", // Cuba
-  "RW", // Rwanda 
+  "RW", // Rwanda
   "VA", // Vatican
 ]);
 
 const allowedCountryCodes = CountryCodeList.filter(
-  (code) => !OFAC_SANCTIONED_CODES.has(code)
+  (code) => !OFAC_SANCTIONED_CODES.has(code),
 );
 
 interface PhoneInputProps {
@@ -49,7 +49,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
   const [number, setNumber] = useState<string>(initialPhoneNumber || "");
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [countryCode, setCountryCode] = useState<CountryCode>(
-    initialCountry || "US"
+    initialCountry || "US",
   );
 
   useEffect(() => {
@@ -138,7 +138,10 @@ const formatPhoneNumber = (phoneNumber: string, iso2: string) => {
   if (!phoneNumber) return "";
   try {
     const parsedNumber = phoneUtil.parse(phoneNumber, iso2);
-    const formatted = phoneUtil.format(parsedNumber, PhoneNumberFormat.INTERNATIONAL);
+    const formatted = phoneUtil.format(
+      parsedNumber,
+      PhoneNumberFormat.INTERNATIONAL,
+    );
     const countryCode = `+${parsedNumber.getCountryCode()}`;
     return formatted.replace(countryCode, "").trim();
   } catch {

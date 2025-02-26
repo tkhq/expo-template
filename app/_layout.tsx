@@ -1,4 +1,4 @@
-import "~/global.css"
+import "~/global.css";
 import { DefaultTheme, Theme, ThemeProvider } from "@react-navigation/native";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
