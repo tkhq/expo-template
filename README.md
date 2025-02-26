@@ -1,50 +1,100 @@
-# Welcome to your Expo app 👋
+# Expo Template Setup Guide
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Getting Started
 
-## Get started
+Follow these steps to create a new Expo project using this template.
 
-1. Install dependencies
+### 1. Create a new Expo app from the template
+```sh
+npx create-expo-app --template https://github.com/tkhq/expo-template
+```
+This will prompt you to enter an app name.
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+### 2. Navigate into your new project directory
+```sh
+cd <app-name>
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 3. Start the development server (iOS by default)
+```sh
+npm run dev
+```
 
-## Learn more
+## Setting Up Authentication
 
-To learn more about developing your project with Expo, look at the following resources:
+To enable user authentication (logging in and signing up) in this template, you need to set up a backend to handle authentication requests.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Why Do We Need a Backend?
+Turnkey requires authentication requests (sign-up/login) to be validated (stamped) using your root user API key-pair. Since this key-pair must remain private, it **cannot** be used directly in the frontend. Instead, authentication requests must be processed and stamped through a backend server before being forwarded to Turnkey.
 
-## Join the community
+### Auth Relayer Overview
 
-Join our community of developers creating universal apps.
+This template provides an **Auth Relayer**, a simple provider that centralizes authentication requests between the frontend and backend. Instead of making direct requests to Turnkey, your frontend will send authentication requests to your backend, which then stamps and forwards them securely to Turnkey.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+#### How It Works
+1. Your frontend makes authentication requests to your backend.
+2. Your backend **stamps** the requests before forwarding them to Turnkey.
+3. Turnkey processes the request and returns a response to your backend.
+4. Your backend sends the response back to the frontend.
+
+## Connecting Authentication
+
+Authentication functionality in this template is managed through the `auth-provider.tsx` file.
+
+### Option 1: Quickstart (Example Server)
+If you want to test authentication without setting up your own backend, you can use the **example-server** from the [React Native Demo Wallet](https://github.com/tkhq/react-native-demo-wallet) repo.
+
+#### Steps:
+1. Clone the example server:
+   ```sh
+   git clone https://github.com/tkhq/react-native-demo-wallet
+   cd react-native-demo-wallet/example-server
+   npm install
+   npm run start
+   ```
+2. Uncomment the example requests inside `auth-provider.tsx`.
+
+### Option 2: Hooking Up Your Own Backend
+To integrate your own backend, update `BACKEND_API_URL` in `auth-provider.tsx`:
+
+```ts
+const BACKEND_API_URL = "https://your-backend.com/api";
+```
+Then replace the placeholder requests with actual backend calls, for example:
+
+```ts
+const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ otpType, contact }),
+});
+```
+Your backend should be set up to properly stamp and relay authentication requests to Turnkey.
+
+#### Required Endpoints:
+When setting up your backend, you can refer to the **example-server** implementation as a guide. Below are the authentication endpoints your backend should define:
+
+##### Mandatory Endpoints:
+- `createSubOrg`: Creates a new sub-organization in Turnkey.
+- `getSubOrgIds`: Retrieves sub-organization IDs based on user filters.
+
+##### Optional Endpoints (depending on implementation):
+- `initOtpAuth`, `otpAuth`: Required for logging in via OTP (email or SMS).
+- `oauthLogin`: Required for logging in via an OIDC-compliant OAuth provider.
+
+## Authentication Provider Overview
+
+The authentication logic is handled in `auth-provider.tsx` using React Context. This provider manages authentication states and methods such as:
+
+### Key Authentication Methods
+- **OTP Login** (email/phone)
+- **Passkey Authentication**
+- **OAuth Authentication**
+
+### Core Functions:
+- `initOtpLogin({ otpType, contact })`: Initiates OTP authentication.
+- `completeOtpAuth({ otpId, otpCode, organizationId })`: Completes OTP authentication.
+- `signUpWithPasskey()`: Registers a user with Passkeys.
+- `loginWithPasskey()`: Authenticates a user using Passkeys.
+- `loginWithOAuth({ oidcToken, providerName, targetPublicKey, expirationSeconds })`: Logs in a user with OAuth providers.
+

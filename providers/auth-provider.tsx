@@ -124,22 +124,23 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         "TODO: Replace this with an actual backend request to initiate OTP authentication"
       );
 
+      // <EXAMPLE:INIT_OTP_AUTH>
       // Example request - replace with your actual backend call
       /*
       const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ otpType, contact }),
       }).then((res) => res.json());
       */
+      // </EXAMPLE:INIT_OTP_AUTH>
 
-      // REMOVE ME: This is a placeholder response
+      // <PLACEHOLDER:INIT_OTP_AUTH_RESPONSE>
       const response = {
         otpId: "otp-id",
         organizationId: "org-id",
       };
+      // </PLACEHOLDER:INIT_OTP_AUTH_RESPONSE>
 
       if (response) {
         dispatch({ type: "INIT_EMAIL_AUTH" });
@@ -174,13 +175,12 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
           "TODO: Replace this with an actual backend request to complete OTP authentication"
         );
 
+        // <EXAMPLE:COMPLETE_OTP_AUTH>
         // Example request - replace with your actual backend call
         /*
         const response = await fetch(`${BACKEND_API_URL}/auth/otpAuth`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             otpId,
             otpCode,
@@ -190,11 +190,13 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
           }),
         }).then((res) => res.json());
         */
+        // </EXAMPLE:COMPLETE_OTP_AUTH>
 
-        // REMOVE ME: This is a placeholder response
+        // <PLACEHOLDER:COMPLETE_OTP_AUTH_RESPONSE>
         const response = {
           credentialBundle: "credential-bundle",
         };
+        // </PLACEHOLDER:COMPLETE_OTP_AUTH_RESPONSE>
 
         if (response.credentialBundle) {
           await createSession(response.credentialBundle);
@@ -235,13 +237,12 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         "TODO: Replace this with an actual backend request to create a sub-organization"
       );
 
+      // <EXAMPLE:SIGNUP_SUB_ORG>
       // Example request - replace with your actual backend call
       /*
       const response = await fetch(`${BACKEND_API_URL}/auth/createSubOrg`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           passkey: {
             challenge: authenticatorParams.challenge,
@@ -250,11 +251,13 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         }),
       }).then((res) => res.json());
       */
+      // </EXAMPLE:SIGNUP_SUB_ORG>
 
-      // REMOVE ME: This is a placeholder response
+      // <PLACEHOLDER:SIGNUP_SUB_ORG_RESPONSE>
       const response = {
         subOrganizationId: "sub-org-id",
       };
+      // </PLACEHOLDER:SIGNUP_SUB_ORG_RESPONSE>
 
       if (response.subOrganizationId) {
         // Successfully created sub-organization, proceed with the login flow
@@ -351,13 +354,12 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         "TODO: Replace this with an actual backend request to authenticate the user with OAuth"
       );
 
+      // <EXAMPLE:OAUTH>
       // Example request - replace with your actual backend call
       /*
       const response = await fetch(`${BACKEND_API_URL}/auth/oAuthLogin`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           oidcToken,
           providerName,
@@ -366,11 +368,13 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         }),
       }).then((res) => res.json());
       */
+      // </EXAMPLE:OAUTH>
 
-      // REMOVE ME: This is a placeholder response
+      // <PLACEHOLDER:OAUTH_RESPONSE>
       const response = {
         credentialBundle: "credential-bundle",
       };
+      // </PLACEHOLDER:OAUTH_RESPONSE>
 
       if (response.credentialBundle) {
         await createSession(response.credentialBundle);
