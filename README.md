@@ -10,6 +10,9 @@ It includes authentication options such as:
 - **OTP Authentication (Email/SMS)**
 - **OAuth Authentication (Google, Apple)**
 
+  ![image](https://github.com/user-attachments/assets/25617d29-12fd-48d2-bf4b-4f1e3f1e223e)
+
+
 ## Why Do We Need a Backend?
 
 Turnkey requires authentication requests (sign-up/login) to be validated (stamped) using your root user API key-pair. Since this key-pair must remain private, it **cannot** be used directly in the frontend. Instead, authentication requests must be processed and stamped through a backend server before being forwarded to Turnkey.
