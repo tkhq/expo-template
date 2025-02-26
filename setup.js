@@ -109,6 +109,18 @@ function stripExampleBackendMarkers() {
 
   let content = fs.readFileSync(authProviderPath, "utf8");
 
+  // find the import block and remove BACKEND_API_URL from the list
+  content = content.replace(
+    /(import\s*{)([^}]+)(}\s*from\s*['"][^'"]+['"])/,
+    (match, start, importList, end) => {
+      const filtered = importList
+        .split(",")
+        .map((item) => item.trim())
+        .filter((item) => item !== "BACKEND_API_URL" && item.length > 0);
+      return `${start} ${filtered.join(", ")} ${end}`;
+    }
+  );
+
   // remove the EXAMPLE block markers but keep the inner content
   content = content.replace(
     /([ \t]*)\/\/\s*<EXAMPLE:[A-Z_]+>\s*\n([\s\S]*?)[ \t]*\/\/\s*<\/EXAMPLE:[A-Z_]+>\s*\n?/gm,
