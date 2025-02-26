@@ -50,7 +50,7 @@ function excludeExampleBackend() {
 
 function cancelSetup() {
   console.log(
-    "\n🛑 Setup canceled. Please read the README and run this script again with 'npm run setup'."
+    "\n🛑 Setup canceled. Please read the README and run this script again with 'npm run setup'.",
   );
   rl.close();
 }
@@ -74,18 +74,18 @@ function applyExampleBackendUpdates() {
     (match, marker, inner) => {
       let code = inner.replace(
         /^[ \t]*\/\/\s*Example request - replace with your actual backend call\s*\n?/gm,
-        ""
+        "",
       );
       code = code.replace(/^[ \t]*\/\*\s*\n?/gm, "");
       code = code.replace(/[ \t]*\*\/\s*\n?/gm, "");
       return code;
-    }
+    },
   );
 
   // remove PLACEHOLDER blocks completely
   content = content.replace(
     /[ \t]*\/\/\s*<PLACEHOLDER:[\w_]+>[\s\S]*?[ \t]*\/\/\s*<\/PLACEHOLDER:[\w_]+>\n?/gm,
-    ""
+    "",
   );
 
   fs.writeFileSync(authProviderPath, content, "utf8");
@@ -118,19 +118,19 @@ function stripExampleBackendMarkers() {
         .map((item) => item.trim())
         .filter((item) => item !== "BACKEND_API_URL" && item.length > 0);
       return `${start} ${filtered.join(", ")} ${end}`;
-    }
+    },
   );
 
   // remove the EXAMPLE block markers but keep the inner content
   content = content.replace(
     /([ \t]*)\/\/\s*<EXAMPLE:[A-Z_]+>\s*\n([\s\S]*?)[ \t]*\/\/\s*<\/EXAMPLE:[A-Z_]+>\s*\n?/gm,
-    (match, indent, inner) => inner
+    (match, indent, inner) => inner,
   );
 
   // remove the PLACEHOLDER block markers but keep the inner content
   content = content.replace(
     /([ \t]*)\/\/\s*<PLACEHOLDER:[\w_]+>\s*\n([\s\S]*?)[ \t]*\/\/\s*<\/PLACEHOLDER:[\w_]+>\s*\n?/gm,
-    (match, indent, inner) => inner
+    (match, indent, inner) => inner,
   );
 
   fs.writeFileSync(authProviderPath, content, "utf8");
@@ -172,7 +172,7 @@ function cleanup() {
       fs.writeFileSync(
         packageJsonPath,
         JSON.stringify(packageJson, null, 2),
-        "utf8"
+        "utf8",
       );
     }
   }

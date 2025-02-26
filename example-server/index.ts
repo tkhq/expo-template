@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 async function handleRequest<T>(
   req: Request,
   res: Response<T>,
-  handler: (req: Request) => Promise<T>
+  handler: (req: Request) => Promise<T>,
 ) {
   try {
     const result = await handler(req);
@@ -34,17 +34,17 @@ async function handleRequest<T>(
 }
 
 app.post("/auth/getSubOrgId", (req, res) =>
-  handleRequest(req, res, getSubOrgId)
+  handleRequest(req, res, getSubOrgId),
 );
 app.post("/auth/initOTPAuth", (req, res) =>
-  handleRequest(req, res, initOtpAuth)
+  handleRequest(req, res, initOtpAuth),
 );
 app.post("/auth/otpAuth", (req, res) => handleRequest(req, res, otpAuth));
 app.post("/auth/oAuthLogin", (req, res) => handleRequest(req, res, oauthLogin));
 app.post("/auth/createSubOrg", (req, res) =>
-  handleRequest(req, res, createSubOrg)
+  handleRequest(req, res, createSubOrg),
 );
 
 app.listen(PORT, () =>
-  console.log(`✅ Server running on http://localhost:${PORT}`)
+  console.log(`✅ Server running on http://localhost:${PORT}`),
 );
