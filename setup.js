@@ -23,7 +23,7 @@ rl.question("Select an option (1/2/3): ", (answer) => {
     removeExampleServer();
   } else {
     console.log(
-      "\n🛑 Setup canceled. Please read the README and run this script again with 'npm run setup'."
+      "\n🛑 Setup canceled. Please read the README and run this script again with 'npm run setup'.",
     );
     rl.close();
     return;
@@ -50,18 +50,18 @@ function updateAuthProvider() {
     (match, marker, inner) => {
       let code = inner.replace(
         /^[ \t]*\/\/\s*Example request - replace with your actual backend call\s*\n?/gm,
-        ""
+        "",
       );
       code = code.replace(/^[ \t]*\/\*\s*\n?/gm, "");
       code = code.replace(/[ \t]*\*\/\s*\n?/gm, "");
       return code;
-    }
+    },
   );
 
   // remove PLACEHOLDER blocks
   content = content.replace(
     /[ \t]*\/\/\s*<PLACEHOLDER:[\w_]+>[\s\S]*?[ \t]*\/\/\s*<\/PLACEHOLDER:[\w_]+>\n?/gm,
-    ""
+    "",
   );
 
   fs.writeFileSync(authProviderPath, content, "utf8");
@@ -103,7 +103,7 @@ function cleanup() {
       fs.writeFileSync(
         packageJsonPath,
         JSON.stringify(packageJson, null, 2),
-        "utf8"
+        "utf8",
       );
     }
   }

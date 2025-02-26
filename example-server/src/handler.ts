@@ -27,7 +27,7 @@ export const turnkeyConfig = {
 const turnkey = new Turnkey(turnkeyConfig).apiClient();
 
 export async function getSubOrgId(
-  req: Request<{}, {}, GetSubOrgIdParams>
+  req: Request<{}, {}, GetSubOrgIdParams>,
 ): Promise<GetSubOrgIdResponse> {
   const { filterType, filterValue } = req.body;
   const { organizationIds } = await turnkey.getSubOrgIds({
@@ -41,7 +41,7 @@ export async function getSubOrgId(
 }
 
 export async function initOtpAuth(
-  req: Request<{}, {}, InitOtpAuthParams>
+  req: Request<{}, {}, InitOtpAuthParams>,
 ): Promise<InitOtpAuthResponse> {
   const { otpType, contact } = req.body;
   let organizationId = turnkeyConfig.defaultOrganizationId;
@@ -79,7 +79,7 @@ export async function initOtpAuth(
 }
 
 export async function otpAuth(
-  req: Request<{}, {}, OtpAuthParams>
+  req: Request<{}, {}, OtpAuthParams>,
 ): Promise<OtpAuthResponse> {
   const {
     otpId,
@@ -103,7 +103,7 @@ export async function otpAuth(
 }
 
 export async function oauthLogin(
-  req: Request<{}, {}, OAuthLoginParams>
+  req: Request<{}, {}, OAuthLoginParams>,
 ): Promise<OAuthLoginResponse> {
   const { oidcToken, providerName, targetPublicKey, expirationSeconds } =
     req.body;
@@ -134,7 +134,7 @@ export async function oauthLogin(
 }
 
 export async function createSubOrg(
-  req: Request<{}, {}, CreateSubOrgParams>
+  req: Request<{}, {}, CreateSubOrgParams>,
 ): Promise<CreateSubOrgResponse> {
   const { email, phone, passkey, oauth } = req.body;
 
