@@ -89,6 +89,7 @@ If you are using the example backend, navigate to the server directory and start
 
 ```sh
 cd example-server
+npm install
 npm run start
 ```
 

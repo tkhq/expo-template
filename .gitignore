@@ -42,6 +42,7 @@ expo-env.d.ts
 .vercel
 
 .env
+!.env.example
 
 
 *.keystore
