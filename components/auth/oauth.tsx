@@ -22,6 +22,7 @@ interface OAuthProps {
   }) => Promise<void>;
 }
 
+// might be helpful for readers if we add a comment on what this nonce is + what it's used for (links to external documentation is fine as well)
 interface AuthButtonProps extends OAuthProps {
   nonce: string | null;
   targetPublicKey: string | null;
@@ -41,7 +42,7 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
     }),
     redirectUri: makeRedirectUri({
       native:
-        "com.googleusercontent.apps.776352896366-vscu7dt8umrlihuv8g54laphblm2rsbm:/oauthredirect",
+        "com.googleusercontent.apps.776352896366-vscu7dt8umrlihuv8g54laphblm2rsbm:/oauthredirect", // should we pull this into a const? or otherwise, store as an env var?
     }),
     scopes: ["openid", "profile", "email"],
     extraParams: nonce ? { nonce } : {},
@@ -56,7 +57,7 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
           oidcToken: id_token,
           providerName: "google",
           targetPublicKey,
-          expirationSeconds: "3600",
+          expirationSeconds: "3600", // let's pull this out into a const as well. I'm guessing many will use this 3600 duration out of the box, so we should potentially add a comment denoting its importance (aka this is how long your session will live; feel free to customize; etc)
         });
 
         // we refresh the nonce before authentication to ensure a new one is used
@@ -107,7 +108,7 @@ export const AppleAuthButton: React.FC<AuthButtonProps> = ({
           oidcToken: credential.identityToken,
           providerName: "apple",
           targetPublicKey,
-          expirationSeconds: "3600",
+          expirationSeconds: "3600", // same here
         });
 
         // we refresh the nonce before authentication to ensure a new one is used

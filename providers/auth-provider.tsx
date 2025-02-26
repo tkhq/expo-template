@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useReducer } from "react";
-import { TurnkeyClient } from "@turnkey/http";
+import { TurnkeyClient } from "@turnkey/http"; // originally our goal with some of these abstractions was to reduce the number of times we'd have to pull @turnkey/http directly. There's nothing wrong with this, but curious if you'd thought about how we can maybe export this from @turnkey/sdk-react-native
 import {
   createPasskey,
   isSupported,
@@ -8,7 +8,7 @@ import {
 import { useRouter } from "expo-router";
 import { LoginMethod } from "~/lib/types";
 import {
-  BACKEND_API_URL,
+  BACKEND_API_URL, // unused
   PASSKEY_APP_NAME,
   RP_ID,
   TURNKEY_API_URL,
@@ -28,6 +28,7 @@ type AuthActionType =
   | { type: "LOADING"; payload: LoginMethod | null }
   | { type: "ERROR"; payload: string }
   | { type: "CLEAR_ERROR" };
+
 interface AuthState {
   loading: LoginMethod | null;
   error: string;
@@ -124,6 +125,8 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
         "TODO: Replace this with an actual backend request to initiate OTP authentication"
       );
 
+      // should we link to such an example backend? or maybe include it in this repo?
+
       // Example request - replace with your actual backend call
       /*
       const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
@@ -208,6 +211,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
   };
 
   // User will be prompted twice for passkey, once for account creation and once for login
+  // reducing this to one step can be interesting (a la our other customers), but aware that's a separate + larger lift
   const signUpWithPasskey = async () => {
     if (!isSupported()) {
       throw new Error("Passkeys are not supported on this device");
