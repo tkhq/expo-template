@@ -111,7 +111,7 @@ function stripExampleBackendMarkers() {
 
   // find the import block and remove BACKEND_API_URL from the list
   content = content.replace(
-    /(import\s*{)([^}]+)(}\s*from\s*['"][^'"]+['"])/,
+    /(import\s*{)([\s\S]+?)(}\s*from\s*['"][^'"]+['"])/gs,
     (match, start, importList, end) => {
       const filtered = importList
         .split(",")
