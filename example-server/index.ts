@@ -36,7 +36,7 @@ async function handleRequest<T>(
 app.post("/auth/getSubOrgId", (req, res) =>
   handleRequest(req, res, getSubOrgId),
 );
-app.post("/auth/initOTPAuth", (req, res) =>
+app.post("/auth/initOtpAuth", (req, res) =>
   handleRequest(req, res, initOtpAuth),
 );
 app.post("/auth/otpAuth", (req, res) => handleRequest(req, res, otpAuth));

@@ -146,7 +146,7 @@ const BACKEND_API_URL = "https://your-backend.com/api";
 ### 2. Replace the placeholder requests with actual backend calls, for example:
 
 ```ts
-const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
+const response = await fetch(`${BACKEND_API_URL}/auth/initOtpAuth`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ otpType, contact }),
