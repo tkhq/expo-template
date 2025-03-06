@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import CountryPicker, {
-  getCallingCode,
   CountryModalProvider,
   Flag,
   Country,

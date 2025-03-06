@@ -51,8 +51,6 @@ export async function initOtpAuth(
     filterValue: contact,
   });
 
-  console.log("organizationIds", organizationIds);
-
   if (organizationIds.length > 0) {
     organizationId = organizationIds[0];
   } else {

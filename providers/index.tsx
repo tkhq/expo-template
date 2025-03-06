@@ -12,11 +12,8 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   const sessionConfig = {
     apiBaseUrl: TURNKEY_API_URL,
     organizationId: TURNKEY_PARENT_ORG_ID,
-    onSessionCreated: () => {
+    onSessionSelected: () => {
       router.replace("/dashboard");
-    },
-    onSessionExpired: () => {
-      router.push("/");
     },
     onSessionCleared: () => {
       router.push("/");

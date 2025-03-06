@@ -51,7 +51,12 @@ cd <app-name>
 
 ### 4. Set Up Environment Variables
 
-Both the frontend and backend require environment variables to function properly. The instructions below provide setup details for the example-server, but if you are using your own backend, adjust accordingly.
+Both the frontend and backend require environment variables to function properly. Example environment variable files are included in the template:
+
+- **Frontend**: `.env.example` in the root directory
+- **Backend**: `.env.example` in the `example-server` directory
+
+You should copy these files and rename them to `.env`, then update the values as needed.
 
 #### Frontend (`.env` in `mp-app`)
 
@@ -73,6 +78,8 @@ EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID="<your_google_android_client_id>"
 #### Backend (`.env` in `example-server`)
 
 ```ini
+PORT="<your_port>" # Defaults to 3000
+
 TURNKEY_API_URL="https://api.turnkey.com"
 TURNKEY_ORGANIZATION_ID="<your_turnkey_organization_id>"
 

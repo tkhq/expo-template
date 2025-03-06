@@ -197,9 +197,10 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
           credentialBundle: "credential-bundle",
         };
         // </PLACEHOLDER:COMPLETE_OTP_AUTH_RESPONSE>
-
-        if (response.credentialBundle) {
-          await createSession(response.credentialBundle);
+        
+        const credentialBundle = response.credentialBundle;
+        if (credentialBundle) {
+          await createSession({bundle: credentialBundle});
         }
       } catch (error: any) {
         dispatch({ type: "ERROR", payload: error.message });
@@ -286,7 +287,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
             ?.credentialBundle;
 
         if (credentialBundle) {
-          await createSession(credentialBundle);
+          await createSession({bundle: credentialBundle});
         }
       }
     } catch (error: any) {
@@ -328,7 +329,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
           ?.credentialBundle;
 
       if (credentialBundle) {
-        await createSession(credentialBundle);
+        await createSession({bundle: credentialBundle});
       }
     } catch (error: any) {
       dispatch({ type: "ERROR", payload: error.message });
@@ -376,8 +377,9 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       };
       // </PLACEHOLDER:OAUTH_RESPONSE>
 
-      if (response.credentialBundle) {
-        await createSession(response.credentialBundle);
+      const credentialBundle = response.credentialBundle;
+      if (credentialBundle) {
+        await createSession({bundle: credentialBundle});
       }
     } catch (error: any) {
       dispatch({ type: "ERROR", payload: error.message });

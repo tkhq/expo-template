@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npx expo prebuild && npx expo run:ios",
-    "android": "expo run:android",
+    "android": "npx expo prebuild && expo run:android",
     "ios": "npx expo prebuild && npx expo run:ios",
     "clean": "rm -rf .expo node_modules",
     "postinstall": "node setup.js",
@@ -22,7 +22,7 @@
     "@rn-primitives/slot": "^1.1.0",
     "@rn-primitives/types": "^1.1.0",
     "@turnkey/react-native-passkey-stamper": "^1.0.6",
-    "@turnkey/sdk-react-native": "^0.1.0",
+    "@turnkey/sdk-react-native": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "expo": "~52.0.37",
@@ -72,5 +72,9 @@
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": true,
+  "files": [
+    ".env.example",
+    "example-server/.env.example"
+  ]
 }
