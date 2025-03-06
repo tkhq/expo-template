@@ -127,7 +127,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       // <EXAMPLE:INIT_OTP_AUTH>
       // Example request - replace with your actual backend call
       /*
-      const response = await fetch(`${BACKEND_API_URL}/auth/initOTPAuth`, {
+      const response = await fetch(`${BACKEND_API_URL}/auth/initOtpAuth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ otpType, contact }),
