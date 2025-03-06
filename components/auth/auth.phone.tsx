@@ -12,8 +12,8 @@ import { getCountryCallingCodeAsync } from "react-native-country-picker-modal/li
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
-// List of OFAC-sanctioned countries to exclude
-const OFAC_SANCTIONED_CODES = new Set([
+// List of unsupported country dial codes
+const UNSUPPORTED_COUNTRY_CODES = new Set([
   "AF", // Afghanistan
   "IQ", // Iraq
   "SY", // Syria
@@ -22,11 +22,11 @@ const OFAC_SANCTIONED_CODES = new Set([
   "KP", // North Korea
   "CU", // Cuba
   "RW", // Rwanda
-  "VA", // Vatican
+  "VA", // Vatican City
 ]);
 
 const allowedCountryCodes = CountryCodeList.filter(
-  (code) => !OFAC_SANCTIONED_CODES.has(code),
+  (code) => !UNSUPPORTED_COUNTRY_CODES.has(code),
 );
 
 interface PhoneInputProps {
