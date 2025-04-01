@@ -1,12 +1,11 @@
-import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { useEffect, useState, useCallback } from "react";
-import { makeRedirectUri } from "expo-auth-session";
+import { makeRedirectUri, ResponseType, useAuthRequest, useAutoDiscovery } from "expo-auth-session";
 import { Button } from "../ui/button";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import {
-  GOOGLE_ANDROID_CLIENT_ID,
-  GOOGLE_IOS_CLIENT_ID,
+  GOOGLE_CLIENT_ID,
   GOOGLE_REDIRCT_URI,
   OAUTH_TOKEN_EXPIRATION_SECONDS,
 } from "~/lib/constants";
@@ -30,27 +29,32 @@ interface AuthButtonProps extends OAuthProps {
   refreshNonce: () => Promise<void>;
 }
 
+WebBrowser.maybeCompleteAuthSession();
+
 export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
   onSuccess,
   nonce,
   targetPublicKey,
   refreshNonce,
 }) => {
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: Platform.select({
-      ios: GOOGLE_IOS_CLIENT_ID,
-      android: GOOGLE_ANDROID_CLIENT_ID,
-    }),
-    redirectUri: makeRedirectUri({
-      native: GOOGLE_REDIRCT_URI,
-    }),
-    scopes: ["openid", "profile", "email"],
-    extraParams: nonce ? { nonce } : {},
-  });
+  const discovery = useAutoDiscovery("https://accounts.google.com");
+
+  const [request, response, promptAsync] = useAuthRequest(
+    {
+      clientId: GOOGLE_CLIENT_ID,
+      redirectUri: GOOGLE_REDIRCT_URI,
+      scopes: ["openid", "profile", "email"],
+      extraParams: nonce ? { nonce } : {},
+      responseType: ResponseType.IdToken,
+      usePKCE: false
+    },
+    discovery
+  );
 
   useEffect(() => {
     const handleResponse = async () => {
       if (response?.type === "success" && targetPublicKey) {
+        
         const { id_token } = response.params;
 
         await onSuccess({
@@ -68,6 +72,7 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
 
     handleResponse();
   }, [response]);
+
 
   return (
     <Button
@@ -159,7 +164,7 @@ export const useEmbeddedKeyAndNonce = () => {
 
       const hashedNonce = await Crypto.digestStringAsync(
         Crypto.CryptoDigestAlgorithm.SHA256,
-        pubKey,
+        pubKey
       );
       setNonce(hashedNonce);
     } catch (error) {
