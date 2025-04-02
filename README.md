@@ -13,6 +13,8 @@ It includes authentication options such as:
   ![image](https://github.com/user-attachments/assets/25617d29-12fd-48d2-bf4b-4f1e3f1e223e)
 
 
+If you want to see a fully-fledged example, check out the [React Native Demo Wallet](https://github.com/tkhq/react-native-demo-wallet).
+
 ## Why Do We Need a Backend?
 
 Turnkey requires authentication requests (sign-up/login) to be validated (stamped) using your root user API key-pair. Since this key-pair must remain private, it **cannot** be used directly in the frontend. Instead, authentication requests must be processed and stamped through a backend server before being forwarded to Turnkey.
@@ -58,7 +60,7 @@ Both the frontend and backend require environment variables to function properly
 
 You should copy these files and rename them to `.env`, then update the values as needed.
 
-#### Frontend (`.env` in `mp-app`)
+#### Frontend (`.env` in `my-app`)
 
 ```ini
 ## General App Info
@@ -73,6 +75,7 @@ EXPO_PUBLIC_TURNKEY_API_URL="https://api.turnkey.com"
 ## Google OAuth Credentials
 EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID="<your_google_ios_client_id>"
 EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID="<your_google_android_client_id>"
+EXPO_PUBLIC_GOOGLE_REDIRECT_URI="<your_google_redirect_uri>"
 ```
 
 #### Backend (`.env` in `example-server`)
