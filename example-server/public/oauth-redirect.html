@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OAuth Redirect</title>
+</head>
+<body>
+  <script>
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    
+    // Redirect to your app's custom URL scheme with the parameters in the query string.
+    // Replace "myapp://" with your actual custom URL scheme.
+    window.location.href = `myapp://?${params.toString()}`;
+  </script>
+</body>
+</html>
