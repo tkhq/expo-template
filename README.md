@@ -137,7 +137,7 @@ To configure Google OAuth in your Turnkey-powered app, follow these steps:
   ```
 - Set the **Authorized Redirect URI** to:
   ```
-  https://oauth-redirect.turnkey.com?scheme=react-native-demo-wallet
+  https://oauth-redirect.turnkey.com?scheme=<your_app_scheme>
   ```
 
 > **Note**: While we provide these hosted URLs for convenience, we strongly recommend hosting your own proxies for best security practices and to make the flow fully customizable and tailored to your app. You can use our open-source implementations as a reference:
