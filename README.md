@@ -12,7 +12,6 @@ It includes authentication options such as:
 
   ![image](https://github.com/user-attachments/assets/25617d29-12fd-48d2-bf4b-4f1e3f1e223e)
 
-
 If you want to see a fully-fledged example, check out the [React Native Demo Wallet](https://github.com/tkhq/react-native-demo-wallet).
 
 ## Why Do We Need a Backend?
@@ -123,6 +122,36 @@ The authentication logic is handled in `auth-provider.tsx` using React Context. 
 - `signUpWithPasskey()`: Registers a user with Passkeys.
 - `loginWithPasskey()`: Authenticates a user using Passkeys.
 - `loginWithOAuth({ oidcToken, providerName, targetPublicKey, expirationSeconds })`: Logs in a user with OAuth providers.
+
+## OAuth Setup
+
+To configure Google OAuth in your Turnkey-powered app, follow these steps:
+
+### 1. Create a Google Web Client ID
+
+- Go to [Google Cloud Console](https://console.cloud.google.com/)
+- Create a new **OAuth client ID** (type: Web)
+- Set the **Authorized Origin** to:
+  ```
+  https://oauth-origin.turnkey.com
+  ```
+- Set the **Authorized Redirect URI** to:
+  ```
+  https://oauth-redirect.turnkey.com?scheme=react-native-demo-wallet
+  ```
+
+> **Note**: While we provide these hosted URLs for convenience, we strongly recommend hosting your own proxies for best security practices and to make the flow fully customizable and tailored to your app. You can use our open-source implementations as a reference:
+>
+> - [oauth-origin](https://github.com/tkhq/frames/tree/main/oauth-origin)
+> - [oauth-redirect](https://github.com/tkhq/frames/tree/main/oauth-redirect)
+
+### 2. Set Your Client ID in `.env`
+
+Add the following to your environment configuration:
+
+```ini
+EXPO_PUBLIC_GOOGLE_CLIENT_ID="<your_google_web_client_id>"
+```
 
 ## Setting Up Your Own Backend
 
