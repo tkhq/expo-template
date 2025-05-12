@@ -15,7 +15,7 @@ import {
   TURNKEY_PARENT_ORG_ID,
 } from "~/lib/constants";
 import { User, useTurnkey } from "@turnkey/sdk-react-native";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 type AuthActionType =
   | { type: "PASSKEY"; payload: User }
@@ -106,7 +106,8 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
 }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
   const router = useRouter();
-  const { createEmbeddedKey, createSession } = useTurnkey();
+  const { createEmbeddedKey, createSession, createSessionFromEmbeddedKey } =
+    useTurnkey();
 
   const initOtpLogin = async ({
     otpType,
@@ -198,10 +199,10 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
           credentialBundle: "credential-bundle",
         };
         // </PLACEHOLDER:COMPLETE_OTP_AUTH_RESPONSE>
-        
+
         const credentialBundle = response.credentialBundle;
         if (credentialBundle) {
-          await createSession({bundle: credentialBundle});
+          await createSession({ bundle: credentialBundle });
         }
       } catch (error: any) {
         dispatch({ type: "ERROR", payload: error.message });
@@ -242,6 +243,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       // <EXAMPLE:SIGNUP_SUB_ORG>
       // Example request - replace with your actual backend call
       /*
+      const publicKey = await createEmbeddedKey({ isCompressed: true });
       const response = await fetch(`${BACKEND_API_URL}/auth/createSubOrg`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -250,6 +252,13 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
             challenge: authenticatorParams.challenge,
             attestation: authenticatorParams.attestation,
           },
+          apiKeys: [
+            {
+              apiKeyName: "Passkey API Key",
+              publicKey,
+              curveType: "API_KEY_CURVE_P256",
+            },
+          ],
         }),
       }).then((res) => res.json());
       */
@@ -261,35 +270,10 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
       };
       // </PLACEHOLDER:SIGNUP_SUB_ORG_RESPONSE>
 
-      if (response.subOrganizationId) {
-        // Successfully created sub-organization, proceed with the login flow
-        const stamper = new PasskeyStamper({
-          rpId: RP_ID,
-        });
-
-        const httpClient = new TurnkeyClient(
-          { baseUrl: TURNKEY_API_URL },
-          stamper,
-        );
-
-        const targetPublicKey = await createEmbeddedKey();
-
-        const sessionResponse = await httpClient.createReadWriteSession({
-          type: "ACTIVITY_TYPE_CREATE_READ_WRITE_SESSION_V2",
-          timestampMs: Date.now().toString(),
-          organizationId: TURNKEY_PARENT_ORG_ID,
-          parameters: {
-            targetPublicKey,
-          },
-        });
-
-        const credentialBundle =
-          sessionResponse.activity.result.createReadWriteSessionResultV2
-            ?.credentialBundle;
-
-        if (credentialBundle) {
-          await createSession({bundle: credentialBundle});
-        }
+      const subOrganizationId = response.subOrganizationId;
+      if (subOrganizationId) {
+        // Successfully created sub-organization, proceed with the session create
+        await createSessionFromEmbeddedKey({ subOrganizationId });
       }
     } catch (error: any) {
       dispatch({ type: "ERROR", payload: error.message });
@@ -330,7 +314,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
           ?.credentialBundle;
 
       if (credentialBundle) {
-        await createSession({bundle: credentialBundle});
+        await createSession({ bundle: credentialBundle });
       }
     } catch (error: any) {
       dispatch({ type: "ERROR", payload: error.message });
@@ -380,7 +364,7 @@ export const AuthRelayProvider: React.FC<AuthRelayProviderProps> = ({
 
       const credentialBundle = response.credentialBundle;
       if (credentialBundle) {
-        await createSession({bundle: credentialBundle});
+        await createSession({ bundle: credentialBundle });
       }
     } catch (error: any) {
       dispatch({ type: "ERROR", payload: error.message });

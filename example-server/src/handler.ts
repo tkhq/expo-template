@@ -134,7 +134,7 @@ export async function oauthLogin(
 export async function createSubOrg(
   req: Request<{}, {}, CreateSubOrgParams>,
 ): Promise<CreateSubOrgResponse> {
-  const { email, phone, passkey, oauth } = req.body;
+  const { email, phone, passkey, oauth, apiKeys } = req.body;
 
   const authenticators = passkey
     ? [
@@ -178,7 +178,7 @@ export async function createSubOrg(
         userPhoneNumber,
         oauthProviders,
         authenticators,
-        apiKeys: [],
+        apiKeys: apiKeys ?? [],
       },
     ],
     rootQuorumThreshold: 1,
